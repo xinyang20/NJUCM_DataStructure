@@ -5,7 +5,9 @@ using namespace std;
 
 int main() {
 	int a[4] = { 4,1,2,3 }, b[4] = { 5,1,3,6 };
+
 	LinkList<int> A(a, 4), B(b, 4);
+
 	cout << "A:";
 	A.PrintList();
 	cout << "B:";

@@ -2,10 +2,13 @@
 #include <iostream>
 using namespace std;
 /*
-	2024/9/11
+	name: LinkList.h
+	
+	change time: 2024/9/11
+
 	change files:
-		add function : int Length();
-		add function : int Empty();
+		add function : int Length()
+		add function : int Empty()
 		add function : DataType Get(int i)
 		add function : int Equal(LinkList<DataType> x)
 		add function : LinkList<DataType> Union(LinkList<DataType> x)

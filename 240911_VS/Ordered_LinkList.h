@@ -6,17 +6,16 @@ using namespace std;
 	name: Ordered_LinkList.h
 
 	creat_time: 2024/9/11
-	
+
 	based_files: LinkList.h(2024/9/11)
 
 	change:
 		add function: void Insert(DataType x)
 		delete funtion: void Insert(int i,DataType x)
 		rebuild function: int Locate(DataType x)
-		rebuild function: int Equal(Ordered_LinkList<DataType> x);
+		rebuild function: int Equal(Ordered_LinkList<DataType> x)
 		rebuild function: Ordered_LinkList<DataType> Union(Ordered_LinkList<DataType> x)
 		rebuild function: Ordered_LinkList<DataType> Intersection(Ordered_LinkList<DataType> x)
-		rebuild function: Ordered_LinkList<DataType> Difference(Ordered_LinkList<DataType> x)
 */
 
 template<class DataType>
@@ -45,7 +44,7 @@ public:
 	Ordered_LinkList<DataType> Union(Ordered_LinkList<DataType> x);//并集
 	Ordered_LinkList<DataType> Intersection(Ordered_LinkList<DataType> x);//交集
 	Ordered_LinkList<DataType> Difference(Ordered_LinkList<DataType> x);//差集
-	
+
 };
 
 template<class DataType>
@@ -179,8 +178,8 @@ template<class DataType>
 Ordered_LinkList<DataType> Ordered_LinkList<DataType>::Union(Ordered_LinkList<DataType> x)//并集
 {
 	Ordered_LinkList<DataType> C;
-	Node<DataType>* p = first->next, xp = x.first->next;
-	while (p->next != NULL && xp->next != NULL) {
+	Node<DataType>* p = first->next, * xp = x.first->next;
+	while (p != NULL && xp != NULL) {
 		if (p->data > xp->data) {
 			C.Insert(xp->data);
 			xp = xp->next;
@@ -195,13 +194,13 @@ Ordered_LinkList<DataType> Ordered_LinkList<DataType>::Union(Ordered_LinkList<Da
 			xp = xp->next;
 		}
 	}
-	if(p->next==NULL)
-		while (xp->next != NULL) {
+	if (p == NULL)
+		while (xp != NULL) {
 			C.Insert(xp->data);
 			xp = xp->next;
 		}
-	if(xp->next==NULL)
-		while (p->next != NULL) {
+	if (xp == NULL)
+		while (p != NULL) {
 			C.Insert(p->data);
 			p = p->next;
 		}
@@ -212,8 +211,13 @@ template<class DataType>
 Ordered_LinkList<DataType> Ordered_LinkList<DataType>::Intersection(Ordered_LinkList<DataType> x)//交集
 {
 	Ordered_LinkList<DataType> C;
-	Node<DataType>* p = first->next;
-	while (p != NULL) {
+	Node<DataType>* p = first->next, * xp = x.first->next;
+	while (p->next != NULL) {
+		while (p->data != xp->data) {
+			if (p->data < xp->data)p = p->next;
+			else xp = xp->next;
+		}
+		if (p->next == NULL || xp->next == NULL)break;
 		if (x.Locate(p->data) != 0) {
 			C.Insert(p->data);
 		}
