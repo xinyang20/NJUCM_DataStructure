@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="LinkPriorityQueue.h" />
     <ClInclude Include="LinkQueue.h" />
     <ClInclude Include="SeqStack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sicker.cpp" />
+    <ClCompile Include="sicker_ordered.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

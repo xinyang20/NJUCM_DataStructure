@@ -21,9 +21,15 @@
     <ClInclude Include="SeqStack.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="LinkPriorityQueue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sicker.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sicker_ordered.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
