@@ -132,6 +132,9 @@
     <ClInclude Include="SeqStack.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DecimalConvertion.cpp" />
+    <ClCompile Include="LinkQueue_main.cpp" />
+    <ClCompile Include="SeqStack_main.cpp" />
     <ClCompile Include="sicker.cpp" />
     <ClCompile Include="sicker_ordered.cpp" />
   </ItemGroup>

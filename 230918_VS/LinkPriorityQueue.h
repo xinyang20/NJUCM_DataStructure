@@ -22,9 +22,11 @@ public:
 	void Push(DataType x, int priority);
 	DataType Pop();
 	DataType Get();
+	DataType Priority_Get(int priority);
 	void ResetPriority(const DataType x, int old_priority, int new_priority);
 	int Empty();
-	void ShowQueue();
+	int Length();
+	int Priority_Length(int priority);
 private:
 	Node<DataType>* front, * rear;
 };
@@ -59,15 +61,24 @@ LinkPriorityQueue<DataType>::~LinkPriorityQueue()
 template<class DataType>
 void LinkPriorityQueue<DataType>::Push(DataType x, int priority)
 {
-	Node<DataType>* p = front, * q = new Node<DataType>;
-	while (p->priority <= priority)
-		p = p->next;
-	if (p == NULL)
-		rear = q;
-	q->data = x;
-	q->priority = priority;
-	q->next = p->next;
-	p->next = q;
+	Node<DataType>* q = new Node<DataType>{ x, priority, NULL };
+	Node<DataType>* p = front;
+	if (front->next == NULL || priority < front->next->priority) {
+		q->next = front->next;
+		front->next = q;
+		if (rear == front) { 
+			rear = q;
+		}
+	}
+	else {
+		while (p->next != NULL && p->next->priority <= priority) {
+			p = p->next;
+		}
+		q->next = p->next;
+		p->next = q;
+		if (p->next == NULL)
+			rear = q;
+	}
 }
 
 template<class DataType>
@@ -95,14 +106,26 @@ DataType LinkPriorityQueue<DataType>::Get()
 }
 
 template<class DataType>
+DataType LinkPriorityQueue<DataType>::Priority_Get(int priority)
+{
+	if (front == rear)throw"下溢";
+	Node<DataType>* p = front->next;
+	while (p->priority < priority&&p->next!=NULL)
+		p = p->next;
+	if (p->priority > priority||p->next==NULL)throw"不存在该优先级";
+	DataType x = p->data;
+	return x;
+}
+
+template<class DataType>
 void LinkPriorityQueue<DataType>::ResetPriority(const DataType x, int old_priority, int new_priority)
 {
-	Node<DataType>* p = front->next;
+	Node<DataType>* p = front->next, * q = NULL;
 	while (p->priority < old_priority && p != NULL)
 		p = p->next;
 	while (p->data != x && p->priority == old_priority && p != NULL) {
 		if (p->next->data == x)
-			Node<DataType>* q = p;
+			q = p;
 		p = p->next;
 	}
 	if (p == NULL)throw"下溢";
@@ -120,12 +143,27 @@ int LinkPriorityQueue<DataType>::Empty()
 }
 
 template<class DataType>
-void LinkPriorityQueue<DataType>::ShowQueue()
+int LinkPriorityQueue<DataType>::Length()
 {
+	int count = 0;
 	Node<DataType>* p = front->next;
-	cout << "data\tpriority\n";
 	while (p != NULL) {
-		cout << p->data << "\t" << p->priority << "\n";
-		p->next;
+		count++;
+		p = p->next;
 	}
+	return count;
+}
+
+template<class DataType>
+int LinkPriorityQueue<DataType>::Priority_Length(int priority)
+{
+	int count = 0;
+	Node<DataType>* p = front->next;
+	while (p->priority < priority)
+		p = p->next;
+	while (p->priority == priority) {
+		count++;
+		p = p->next;
+	}
+	return count;
 }

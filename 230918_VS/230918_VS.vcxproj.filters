@@ -26,10 +26,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sicker.cpp">
+    <ClCompile Include="sicker_ordered.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="sicker_ordered.cpp">
+    <ClCompile Include="DecimalConvertion.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkQueue_main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SeqStack_main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sicker.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

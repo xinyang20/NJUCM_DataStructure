@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string>
+#include <string.h>
 using namespace std;
 #include "LinkPriorityQueue.h"
 
@@ -42,37 +42,56 @@ sicker::sicker(const sicker& other)
 	this->name = other.name;
 	this->number = other.number;
 }
-const string priroity_char[4] = { "","普","急","危" };
-int num[4] = { 0,0,0,0 };
+const string priority_char[4] = { "","危","急","普" };
+int num[4] = { 0,1,1,1 };
 LinkPriorityQueue<sicker> SL;
 
-void Register(char* name,int priority) {
-	string 
-	sicker* s = new sicker(num, name);
-	SL.EnQueue(*s);
-	cout << "挂号成功，您的就诊号为：" << num << endl;
-	num++;
+void Register(string name, int priority) {
+	string number = priority_char[priority];
+	number += (char)(num[priority] + (int)('0'));
+	num[priority]++;
+	sicker s(number, name);
+	SL.Push(s, priority);
+	cout << "挂号成功，您的就诊号为：" << number << endl;
 }
 
 void call() {
-	sicker s(SL.GetQueue());
+	sicker s(SL.Get());
 	cout << "请" << s.GetNumber() << "号：" << s.GetName() << "就诊。" << endl;
-	SL.DeQueue();
+	SL.Pop();
 }
 
-int wait_number(int x) {
-	sicker shead(SL.GetQueue());
-	int count = x - shead.GetNumber();
+int wait_number(string x) {
+	int priority;
+	if (x.substr(0, 2) == "危")priority = 1;
+	else if (x.substr(0, 2) == "急")priority = 2;
+	else if (x.substr(0, 2) == "普")priority = 3;
+	else throw"就诊号不合法";
+	int np = 1, count = 0;
+	while (np < priority) {
+		count = SL.Priority_Length(np);
+		np++;
+	}
+	int now_num = 0, num = 0;
+	for (int i = 2; x[i] != '\0'; i++)
+		num = num * 10 + (int)(x[i] - (int)('0'));
+	string nx = SL.Priority_Get(priority).GetNumber();
+	for (int i = 2; nx[i] != '\0'; i++)
+		now_num = now_num * 10 + (int)(nx[i] - (int)('0'));
+	count += num - now_num;
 	return count;
 }
 
 void guahao() {
 	system("cls");
-	char a[10];
+	string name;
+	int priority;
 	cout << "---------- 挂  号 ----------" << endl;
 	cout << "请输入姓名：";
-	cin >> a;
-	Register(a);
+	cin >> name;
+	cout << "请输入紧急程度（1为危重，2为紧急，3为普通）：";
+	cin >> priority;
+	Register(name, priority);
 	system("pause");
 }
 
@@ -85,23 +104,48 @@ void search() {
 	system("cls");
 	cout << "---------- 挂  号 ----------" << endl;
 	cout << "请输入就诊号：";
-	int num;
+	string num;
 	cin >> num;
 	cout << "等待人数：" << wait_number(num) << endl;
 	system("pause");
 }
 
-void menu(bool& IsRun) {
+void test() {
+	Register("张三", 1);
+	Register("李四", 2);
+	Register("王五", 2);
+	Register("李六", 3);
+	call();
+	call();
+	Register("赵七", 3);
+	Register("钱八", 2);
+	Register("孙九", 2);
+	cout << "插入危2前，急3前面还有：" << wait_number("急3") << "人" << endl;
+	Register("李十", 1);
+	cout << "插入危2后，急3前面还有：" << wait_number("急3") << "人" << endl;
+	Register("高玖", 2);
+	call();
+	call();
+	Register("顾十", 2);
+	Register("夏菲", 3);
+	system("pause");
+}
+
+void menu(bool& IsRun, bool clear = true) {
 	int input;
-	system("cls");
+	if (clear)system("cls");
 	cout << "---------- 菜 单 ----------" << endl;
 	cout << "1.患者挂号" << endl;
 	cout << "2.医生叫号" << endl;
 	cout << "3.查询等待人数" << endl;
+	cout << "4.运行测试" << endl;
 	cout << "0.退出系统" << endl;
 	cin >> input;
 	switch (input)
 	{
+	case 0:
+		IsRun = false;
+		break;
 	case 1:
 		guahao();
 		break;
@@ -111,21 +155,20 @@ void menu(bool& IsRun) {
 	case 3:
 		search();
 		break;
+	case 4:
+		test();
+		break;
 	default:
-		IsRun = false;
+		system("cls");
+		cout << "输入非法,请重新输入：" << endl;
+		menu(IsRun, false);
 		break;
 	}
 }
 
-//int main() {
-//	bool IsRun = true;
-//	while (IsRun) {
-//		menu(IsRun);
-//	}
-//	return 0;
-//}
-
 int main() {
-
+	bool IsRun = true;
+	while (IsRun)
+		menu(IsRun);
 	return 0;
 }

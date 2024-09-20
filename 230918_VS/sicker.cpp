@@ -90,6 +90,24 @@ void search() {
 	system("pause");
 }
 
+void test() {
+	char name1[10] = "张三";
+	Register(name1);
+	char name2[10] = "李四";
+	Register(name2);
+	char name3[10] = "王五";
+	Register(name3);
+	char name4[10] = "赵六";
+	Register(name4);
+	char name5[10] = "钱七";
+	Register(name5);
+	cout << "4号前还有：" << wait_number(4) << "人" << endl;
+	call();
+	call();
+	cout << "4号前还有：" << wait_number(4) << "人" << endl;
+	system("pause");
+}
+
 void menu(bool &IsRun) {
 	int input;
 	system("cls");
@@ -97,6 +115,7 @@ void menu(bool &IsRun) {
 	cout << "1.患者挂号" << endl;
 	cout << "2.医生叫号" << endl;
 	cout << "3.查询等待人数" << endl;
+	cout << "4.运行测试" << endl;
 	cout << "0.退出系统" << endl;
 	cin >> input;
 	switch (input)
@@ -109,6 +128,9 @@ void menu(bool &IsRun) {
 		break;
 	case 3:
 		search();
+		break;
+	case 4:
+		test();
 		break;
 	default:
 		IsRun = false;
@@ -123,5 +145,3 @@ int main() {
 	}
 	return 0;
 }
-
-
