@@ -1,11 +1,13 @@
 #pragma once
+
+
 const int StackSize = 200;
 
 template<class DataType>
 class BothStack {
 public:
 	BothStack();
-	BothStack(const BothStack<DataType>& other);
+	BothStack(const BothStack& other);
 	void Push(int i, DataType x);
 	DataType Pop(int i);
 	DataType GetTop(int i);
@@ -24,7 +26,7 @@ BothStack<DataType>::BothStack()
 }
 
 template<class DataType>
-BothStack<DataType>::BothStack(const BothStack<DataType>& other)
+BothStack<DataType>::BothStack(const BothStack& other)
 {
 	top1 = other.top1;
 	top2 = other.top2;

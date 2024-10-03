@@ -58,6 +58,7 @@ void LinkQueue<DataType>::EnQueue(DataType x) {
 template<class DataType>
 DataType LinkQueue<DataType>::DeQueue() {
 	Node<DataType>* p = NULL;
+	p = new Node<DataType>;
 	DataType x;
 	if (rear == front)throw"ÏÂÒç";
 	p = front->next;

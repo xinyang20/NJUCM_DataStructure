@@ -1,8 +1,5 @@
 #pragma once
 
-/*
-	
-*/
 
 const int StackSize = 200;
 

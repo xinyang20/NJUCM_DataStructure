@@ -15,6 +15,15 @@ using namespace std;
 		add function : LinkList<DataType> Intersection(LinkList<DataType> x)
 		add function : LinkList<DataType> Difference(LinkList<DataType> x)
 		add function : LinkList(const LinkList<DataType>& other)
+
+
+
+	change time: 2024/9/25
+
+	change files:
+		delete function : LinkList<DataType> Union(LinkList<DataType> x)
+		delete function : LinkList<DataType> Intersection(LinkList<DataType> x)
+		delete function : LinkList<DataType> Difference(LinkList<DataType> x)
 */
 
 template<class DataType>

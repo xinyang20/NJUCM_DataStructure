@@ -10,7 +10,7 @@ template<class DataType>
 class DoubleQueue {
 public:
 	DoubleQueue();
-	DoubleQueue(DataType a[],int n);
+	DoubleQueue(DataType a[], int n);
 	DoubleQueue(const DoubleQueue& other);
 	~DoubleQueue();
 	void EnQueueHead(DataType x);
@@ -35,12 +35,23 @@ DoubleQueue<DataType>::DoubleQueue() {
 
 template<class DataType>
 DoubleQueue<DataType>::DoubleQueue(DataType a[], int n) {
-
+	Node<DataType>* p = new Node<DataType>;
+	front = rear = p;
+	front->prev = NULL;
+	front->next = NULL;
+	for (int i = 0; i < n; i++) {
+		EnQueueTail(a[i]);
+	}
 }
 
 template<class DataType>
 DoubleQueue<DataType>::DoubleQueue(const DoubleQueue& other) {
-
+	front = rear = new Node<DataType>;
+	Node<DataType>* p = other.front->next;
+	while (p != NULL) {
+		EnQueueTail(p->data);
+		p = p->next;
+	}
 }
 
 template<class DataType>
@@ -56,7 +67,14 @@ DoubleQueue<DataType>::~DoubleQueue() {
 template<class DataType>
 void DoubleQueue<DataType>::EnQueueHead(DataType x)
 {
-
+	Node<DataType>* p = NULL;
+	p = new Node<DataType>;
+	p->data = x;
+	p->prev = front;
+	p->next = front->next;
+	front->next = p;
+	if (rear->prev == NULL)
+		rear = p;
 }
 
 template<class DataType>
@@ -76,11 +94,11 @@ DataType DoubleQueue<DataType>::DeQueueHead()
 {
 	Node<DataType>* p = NULL;
 	DataType x;
-	if (rear == front)throw"ÏÂÒç";
+	if (rear == front || front->next == NULL)throw"ÏÂÒç";
 	p = front->next;
 	x = p->data;
 	front->next = p->next;
-	p->next->prev = front;
+	if (p->next != NULL)p->next->prev = front;
 	if (p->next == NULL)
 		rear = front;
 	delete p;
@@ -96,8 +114,9 @@ DataType DoubleQueue<DataType>::DeQueueTail()
 	p = rear;
 	x = p->data;
 	rear = p->prev;
-	rear->next = NULL;
-	if (p->next == NULL)
+	if (rear != NULL)
+		rear->next = NULL;
+	else
 		rear = front;
 	delete p;
 	return x;
