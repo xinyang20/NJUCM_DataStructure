@@ -27,6 +27,21 @@
     <ClInclude Include="LinkList.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="BothStack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkPriorityQueue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkStack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Ordered_LinkList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Set.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

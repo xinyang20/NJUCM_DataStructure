@@ -127,10 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BothStack.h" />
     <ClInclude Include="LinkList.h" />
+    <ClInclude Include="LinkPriorityQueue.h" />
     <ClInclude Include="LinkQueue.h" />
+    <ClInclude Include="LinkStack.h" />
+    <ClInclude Include="Ordered_LinkList.h" />
     <ClInclude Include="SeqList.h" />
     <ClInclude Include="SeqStack.h" />
+    <ClInclude Include="Set.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
