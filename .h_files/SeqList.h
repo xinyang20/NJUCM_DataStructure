@@ -1,6 +1,6 @@
 #pragma once
 
-const int MaxSize = 20;
+const int MaxSize = 50;
 
 template<class DataType>
 class SeqList {
@@ -14,6 +14,8 @@ public:
 	void Insert(int i, DataType x);
 	DataType Delete(int i);
 	int Locate(DataType x);
+	DataType operator[](int i);
+	DataType Get(int i);
 	void PrintList();
 };
 
@@ -58,9 +60,26 @@ int SeqList<DataType>::Locate(DataType x) {
 }
 
 template<class DataType>
+DataType SeqList<DataType>::operator[](int i)
+{
+	if (i >= length)throw"位置非法";
+	return data[i];
+}
+
+template<class DataType>
+DataType SeqList<DataType>::Get(int i)
+{
+	if (i >= length)throw"位置非法";
+	return data[i];
+}
+
+template<class DataType>
 void SeqList<DataType>::PrintList() {
 	for (int i = 0; i < length; i++) {
 		cout << data[i] << " ";
 	}
 	cout << endl;
 }
+
+
+int Get_SeqList_MaxSize() { return MaxSize; };

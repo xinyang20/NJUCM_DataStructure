@@ -131,9 +131,11 @@
     <Text Include="artical_processed.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Matrix.h" />
     <ClCompile Include="Task3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SeqList.h" />
     <ClInclude Include="SparseMatrix.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

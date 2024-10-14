@@ -23,12 +23,18 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Matrix.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
     <ClCompile Include="Task3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SparseMatrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SeqList.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
