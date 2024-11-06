@@ -4,175 +4,178 @@
 #include<climits>
 using namespace std;
 #define MAXLEN 2000
-typedef struct{
+typedef struct {
 	char chars;
 	int weight;
-	int parent,lchild,rchild;
-}HTNode,*HuffmanTree;
+	int parent, lchild, rchild;
+} HTNode, *HuffmanTree;
 
 typedef char **HuffmanCode;
 
-typedef struct{
+typedef struct {
 	char chars;
 	int weight;
-}InputData;
+} InputData;
 
 
 
-//inputData´æ´¢ÁËÃ¿¸öÒ¶×Ó½Úµã¶ÔÓ¦µÄ×Ö·ûºÍÈ¨Öµ£¨´Ó1ºÅµ¥Ôª¿ªÊ¼£©£¬nÎªÒ¶×Ó½Úµã¸öÊı
-//·µ»Ø¹¹ÔìºÃµÄ¹ş·òÂüÊ÷µÄÊ×µØÖ·
-HuffmanTree CreatHuffmanTree(int n, InputData* inputData){
-	//´úÂë¿ªÊ¼
-    HuffmanTree HT = new HTNode[2*n];
-    for(int i=1;i<=n;i++){
-        HT[i].chars=inputData[i+1].chars;
-        HT[i].weight=inputData[i+1].weight;
-        HT[i].parent=HT[i].lchild=HT[i].rchild=0;
-    }
-    for(int num=n+1;num<2*n;num++){
-    	int p = -1, q = -1;
-	    for (int i = 0; i < num; i++) {
-	        if (HT[i].parent == 0) {
-	            if (p == -1 || HT[i].weight < HT[p].weight) {
-	                q = p;
-	                p = i;
-	            } else if (q == -1 || HT[i].weight < HT[q].weight) {
-	                q = i;
-	            }
-	        }
-	    }
-        HT[num].chars='\\';
-        HT[num].weight=HT[p].weight+HT[q].weight;
-        HT[num].lchild=p;
-        HT[num].rchild=q;
-        HT[p].parent=num;
-        HT[q].parent=num;
-    }
-    return HT;
-    //´úÂë½áÊø
+//inputDataå­˜å‚¨äº†æ¯ä¸ªå¶å­èŠ‚ç‚¹å¯¹åº”çš„å­—ç¬¦å’Œæƒå€¼ï¼ˆä»1å·å•å…ƒå¼€å§‹ï¼‰ï¼Œnä¸ºå¶å­èŠ‚ç‚¹ä¸ªæ•°
+//è¿”å›æ„é€ å¥½çš„å“ˆå¤«æ›¼æ ‘çš„é¦–åœ°å€
+HuffmanTree CreatHuffmanTree(int n, InputData* inputData) {
+	//ä»£ç å¼€å§‹
+	HuffmanTree HT = new HTNode[2 * n];
+	for (int i = 1; i <= n; i++) {
+		HT[i].chars = inputData[i].chars;
+		HT[i].weight = inputData[i].weight;
+		HT[i].parent = HT[i].lchild = HT[i].rchild = 0;
+	}
+	for (int num = n + 1; num < 2 * n; num++) {
+		int p = -1, q = -1;
+		for (int i = 1; i < num; i++) {
+			if (HT[i].parent == 0) {
+				if (p == -1 || HT[i].weight < HT[p].weight) {
+					q = p;
+					p = i;
+				} else if (q == -1 || HT[i].weight < HT[q].weight) {
+					q = i;
+				}
+			}
+		}
+		HT[num].chars = '\\';
+		HT[num].weight = HT[p].weight + HT[q].weight;
+		HT[num].lchild = p;
+		HT[num].rchild = q;
+		HT[p].parent = num;
+		HT[q].parent = num;
+	}
+	return HT;
+	//ä»£ç ç»“æŸ
 }
 
 
-//ÓÃHC·µ»ØÃ¿¸öÒ¶×Ó½ÚµãµÄ¹ş·òÂü±àÂë
-HuffmanCode CreatHuffmanCode(HuffmanTree HT, int n){
-	//´úÂë¿ªÊ¼
-    HuffmanCode HC =new char*[n+3];
-    for(int i=1;i<=n;i++){
-        HC[i]=new char[n+5];
-        HC[i][0]=HT[i].chars;//×Ö·û×ÔÉí
-        int lastNode=0,nowNode=i;
-        int length=1;
-        while(HT[nowNode].parent!=0){
-            lastNode=nowNode;
-            nowNode=HT[nowNode].parent;
-            if(lastNode==HT[nowNode].lchild)
-                HC[i][length++]='0';
-            else if(lastNode==HT[nowNode].rchild)
-                HC[i][length++]='1';
-        }
-        HC[i][length]='\0';
-        length--;
-        for(int j=1;j<=length/2;j++){
-            char temp=HC[i][j];
-            HC[i][j]=HC[i][length-j+1];
-            HC[i][length-j+1]=temp;
-        }
-    }
-    return HC;
-    //´úÂë½áÊø
+//ç”¨HCè¿”å›æ¯ä¸ªå¶å­èŠ‚ç‚¹çš„å“ˆå¤«æ›¼ç¼–ç 
+HuffmanCode CreatHuffmanCode(HuffmanTree HT, int n) {
+	//ä»£ç å¼€å§‹
+	HuffmanCode HC = new char*[n + 3];
+	for (int i = 1; i <= n; i++) {
+		HC[i] = new char[n + 5];
+		// HC[i][0]=HT[i].chars;//å­—ç¬¦è‡ªèº«
+		int lastNode = 0, nowNode = i;
+		int length = 0;
+		while (HT[nowNode].parent != 0) {
+			lastNode = nowNode;
+			nowNode = HT[nowNode].parent;
+			if (lastNode == HT[nowNode].lchild)
+				HC[i][length++] = '0';
+			else if (lastNode == HT[nowNode].rchild)
+				HC[i][length++] = '1';
+		}
+		HC[i][length] = '\0';
+		length;
+		for (int j = 0; j < length / 2; j++) {
+			char temp = HC[i][j];
+			HC[i][j] = HC[i][length - j - 1];
+			HC[i][length - j - 1] = temp;
+		}
+		// HC[i][length]='|';
+		// HC[i][length+1]='\0';
+	}
+	return HC;
+	//ä»£ç ç»“æŸ
 }
 
-//ÀûÓÃ±àÂë±íHC¶Ô´æ·ÅÔÚinputÖĞ£¨´Ó1ºÅµ¥Ôª¿ªÊ¼£©µÄ×Ö·û´®½øĞĞ¹ş·òÂü±àÂë,½«±àÂë½á¹û´æ´¢ÔÚencodeÖĞ
-//ĞèÒªÔÚencode×îºóÌí¼ÓÒ»¸ö'\0'
-void Encoded(HuffmanTree HT, HuffmanCode HC, int n, char input[], char *encode){
-	//´úÂë¿ªÊ¼
-    int pos = 0;
+//åˆ©ç”¨ç¼–ç è¡¨HCå¯¹å­˜æ”¾åœ¨inputä¸­ï¼ˆä»1å·å•å…ƒå¼€å§‹ï¼‰çš„å­—ç¬¦ä¸²è¿›è¡Œå“ˆå¤«æ›¼ç¼–ç ,å°†ç¼–ç ç»“æœå­˜å‚¨åœ¨encodeä¸­
+//éœ€è¦åœ¨encodeæœ€åæ·»åŠ ä¸€ä¸ª'\0'
+void Encoded(HuffmanTree HT, HuffmanCode HC, int n, char input[], char *encode) {
+	//ä»£ç å¼€å§‹
+	int pos = 0;
 
-    for (int i = 1; i <= n; i++) {
-        char currentChar = input[i];
-        for (int j = 1; j <= n; j++) {
-            if (HC[j][0] == currentChar) {
-                int k = 1;
-                while (HC[j][k] != '\0') {
-                    encode[pos++] = HC[j][k];
-                    k++;
-                }
-                break;
-            }
-        }
-    }
-    encode[pos] = '\0';
+	for (int i = 0; i < strlen(input); i++) {
+		char currentChar = input[i];
+		for (int j = 1; j <= n; j++) {
+			if (HT[j].chars == currentChar) {
+				strcpy(&encode[pos], HC[j]);
+				pos += strlen(HC[j]);
+				break;
+			}
+		}
+	}
+	encode[pos] = '\0';
 
-    //´úÂë½áÊø
+	//ä»£ç ç»“æŸ
 }
 
-//ÀûÓÃ¹ş·òÂüÊ÷HT¶Ô´æ·ÅÔÚencodeÖĞµÄ±àÂë´®½øĞĞÒëÂë£¬½«ÒëÂë½á¹û´æ´¢ÔÚdecodeÖĞ
-//ĞèÒªÔÚdecode×îºóÌí¼ÓÒ»¸ö'\0'
-void Decoded(HuffmanTree HT, int n, char *encode, char *decode){
-	//´úÂë¿ªÊ¼
-    int p=2*n-2;
-    int pos=0;
+//åˆ©ç”¨å“ˆå¤«æ›¼æ ‘HTå¯¹å­˜æ”¾åœ¨encodeä¸­çš„ç¼–ç ä¸²è¿›è¡Œè¯‘ç ï¼Œå°†è¯‘ç ç»“æœå­˜å‚¨åœ¨decodeä¸­
+//éœ€è¦åœ¨decodeæœ€åæ·»åŠ ä¸€ä¸ª'\0'
+void Decoded(HuffmanTree HT, int n, char *encode, char *decode) {
+	//ä»£ç å¼€å§‹
+	int p = 2 * n - 1;
+	int pos = 0;
 
-    for(int i=0;encode[i]!='\0';i++){
-        if(encode[i] == '0') p = HT[p].lchild;
-		else if(encode[i] == '1') p = HT[p].rchild;
-        if(HT[p].chars!='\\'){
-            decode[pos++]=HT[p].chars;
-            p=2*n-2;
-        }
-    }
-    decode[pos]='\0';
+	for (int i = 0; encode[i] != '\0'; i++) {
+		if (encode[i] == '0')
+			p = HT[p].lchild;
+		else if (encode[i] == '1')
+			p = HT[p].rchild;
+		if (HT[p].chars != '\\') {
+			decode[pos++] = HT[p].chars;
+			// cout<<"in i="<<i<<",add char:"<<HT[p].chars<<"\n";
+			p = 2 * n - 1;
+		}
+	}
+	decode[pos] = '\0';
 
-    //´úÂë½áÊø
+	//ä»£ç ç»“æŸ
 }
 
-//´¦ÀíÊäÈëÊı¾İinput
-//ÓÃinputData·µ»ØÃ¿¸öÒ¶×Ó½Úµã¶ÔÓ¦µÄ×Ö·û¡¢È¨Öµ£¬ÓÃn·µ»ØÒ¶×Ó½Úµã×ÜÊı
-void InputProcess(InputData* &inputData, int &n, char input[]){
-	int i,j;
+//å¤„ç†è¾“å…¥æ•°æ®input
+//ç”¨inputDataè¿”å›æ¯ä¸ªå¶å­èŠ‚ç‚¹å¯¹åº”çš„å­—ç¬¦ã€æƒå€¼ï¼Œç”¨nè¿”å›å¶å­èŠ‚ç‚¹æ€»æ•°
+void InputProcess(InputData* &inputData, int &n, char input[]) {
+	int i, j;
 	int len = strlen(input);
-	inputData = new InputData[len+1];
-	for(i=1;i<=len;i++)
+	inputData = new InputData[len + 1];
+	for (i = 1; i <= len; i++)
 		inputData[i].weight = 0;
 	inputData[1].chars = input[0];
 	inputData[1].weight++;
-	n=1;
-	for(i=1;i<len;i++){
-		for(j=1;j<=n;j++)
-			if(inputData[j].chars == input[i])
+	n = 1;
+	for (i = 1; i < len; i++) {
+		for (j = 1; j <= n; j++)
+			if (inputData[j].chars == input[i])
 				break;
-		if(j>n)
+		if (j > n)
 			inputData[++n].chars = input[i];
 		inputData[j].weight++;
 	}
 }
 
-//Êä³öº¯Êı
-void show(HuffmanTree HT, HuffmanCode HC, int n, char *encode, char *decode){
-	for(int i=1;i<=n;i++)
-		cout<<"i:"<<i<<" "<<HT[i].chars<<":"<<HT[i].weight<<" "<<endl;
-	cout<<endl;
-	for(int i=1;i<=2*n-1;i++)
-		cout<<"i:"<<i<<" "<<HT[i].weight<<" "<<HT[i].parent<<" "<<HT[i].lchild<<" "<<HT[i].rchild<<endl;
-	for(int i=1;i<=n;i++)
-		cout<<HT[i].chars<<":"<<HC[i]<<" ";
-	cout<<endl;
-	cout<<encode<<endl;
-	cout<<decode<<endl;
+//è¾“å‡ºå‡½æ•°
+void show(HuffmanTree HT, HuffmanCode HC, int n, char *encode, char *decode) {
+	for (int i = 1; i < n; i++)
+		cout << HT[i].chars << ":" << HT[i].weight << " ";
+	cout << HT[n].chars << ":" << HT[n].weight;
+	cout << endl;
+	for (int i = 1; i <= 2 * n - 1; i++)
+		cout << i << " " << HT[i].weight << " " << HT[i].parent << " " << HT[i].lchild << " " << HT[i].rchild << endl;
+	for (int i = 1; i <= n; i++)
+		cout << HT[i].chars << ":" << HC[i] << " ";
+	cout << endl;
+	cout << encode << endl;
+	cout << decode << endl;
 }
 
-int main(){
-	char input[MAXLEN]; //ÊäÈëÊı¾İ
-	cin>>input;
+int main() {
+	char input[MAXLEN]; //è¾“å…¥æ•°æ®
+	cin >> input;
 
-	InputData* inputData;  //¶ÔÊäÈëÊı¾İinput½øĞĞ´¦Àí£¬±£´æ×Ö·ûºÍÈ¨Öµ£¨´Ó1ºÅµ¥Ôª¿ªÊ¼£©
-	int n;  //ÊäÈëÊı¾İÖĞµÄ×Ö·û¸öÊı
+	InputData* inputData;  //å¯¹è¾“å…¥æ•°æ®inputè¿›è¡Œå¤„ç†ï¼Œä¿å­˜å­—ç¬¦å’Œæƒå€¼ï¼ˆä»1å·å•å…ƒå¼€å§‹ï¼‰
+	int n;  //è¾“å…¥æ•°æ®ä¸­çš„å­—ç¬¦ä¸ªæ•°
 	InputProcess(inputData, n, input);
 
 	HuffmanTree HT = CreatHuffmanTree(n, inputData);
 	HuffmanCode HC = CreatHuffmanCode(HT, n);
 
-	char *encode = new char[n*MAXLEN];
+	char *encode = new char[n * MAXLEN];
 	Encoded(HT, HC, n, input, encode);
 
 	char *decode = new char[MAXLEN];
@@ -182,4 +185,3 @@ int main(){
 
 	return 0;
 }
-
