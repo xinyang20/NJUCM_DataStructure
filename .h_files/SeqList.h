@@ -1,6 +1,11 @@
 #pragma once
 
-const int MaxSize = 50;
+/*
+	修改日期：2024/11/6
+	修改内容：增加GetLength()函数
+*/
+
+const int MaxSize = 100;
 
 template<class DataType>
 class SeqList {
@@ -17,6 +22,7 @@ public:
 	DataType operator[](int i);
 	DataType Get(int i);
 	void PrintList();
+	int GetLength();
 };
 
 template<class DataType>
@@ -79,6 +85,11 @@ void SeqList<DataType>::PrintList() {
 		cout << data[i] << " ";
 	}
 	cout << endl;
+}
+
+template<class DataType>
+int SeqList<DataType>::GetLength() {
+	return length;
 }
 
 

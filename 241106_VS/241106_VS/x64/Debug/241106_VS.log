@@ -1,0 +1,4 @@
+﻿  main.cpp
+D:\Code\1_NJUCM\NJUCM_DataStructure\241106_VS\main.cpp(27,24): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+D:\Code\1_NJUCM\NJUCM_DataStructure\241106_VS\main.cpp(99,19): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+  241106_VS.vcxproj -> D:\Code\1_NJUCM\NJUCM_DataStructure\241106_VS\x64\Debug\241106_VS.exe
