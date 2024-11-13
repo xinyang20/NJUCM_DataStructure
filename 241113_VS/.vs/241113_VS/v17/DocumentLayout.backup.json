@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Code\\1_NJUCM\\NJUCM_DataStructure\\241113_VS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9853AC7F-C489-4FFB-82CF-BF4F7A98D389}|241113_VS.vcxproj|D:\\Code\\1_NJUCM\\NJUCM_DataStructure\\241113_VS\\BST.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9853AC7F-C489-4FFB-82CF-BF4F7A98D389}|241113_VS.vcxproj|solutionrelative:BST.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9853AC7F-C489-4FFB-82CF-BF4F7A98D389}|241113_VS.vcxproj|D:\\Code\\1_NJUCM\\NJUCM_DataStructure\\241113_VS\\BST.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9853AC7F-C489-4FFB-82CF-BF4F7A98D389}|241113_VS.vcxproj|solutionrelative:BST.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BST.cpp",
+              "DocumentMoniker": "D:\\Code\\1_NJUCM\\NJUCM_DataStructure\\241113_VS\\BST.cpp",
+              "RelativeDocumentMoniker": "BST.cpp",
+              "ToolTip": "D:\\Code\\1_NJUCM\\NJUCM_DataStructure\\241113_VS\\BST.cpp",
+              "RelativeToolTip": "BST.cpp",
+              "ViewState": "AgIAAHUBAAAAAAAAAAAowIIBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-13T06:29:41.899Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BST.h",
+              "DocumentMoniker": "D:\\Code\\1_NJUCM\\NJUCM_DataStructure\\241113_VS\\BST.h",
+              "RelativeDocumentMoniker": "BST.h",
+              "ToolTip": "D:\\Code\\1_NJUCM\\NJUCM_DataStructure\\241113_VS\\BST.h",
+              "RelativeToolTip": "BST.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-13T06:28:58.828Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
