@@ -1,2 +1,3 @@
-﻿  Main.cpp
-  241120_VS.vcxproj -> D:\Code\1_NJUCM\NJUCM_DataStructure\241120_VS\x64\Debug\241120_VS.exe
+﻿  ai_main.cpp
+  LINK : 没有找到 F:\Code\1_NJUCM\NJUCM_DataStructure\241120_VS\x64\Debug\241120_VS.exe 或上一个增量链接没有生成它；正在执行完全链接
+  241120_VS.vcxproj -> F:\Code\1_NJUCM\NJUCM_DataStructure\241120_VS\x64\Debug\241120_VS.exe
