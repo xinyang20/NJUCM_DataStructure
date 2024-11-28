@@ -1,0 +1,3 @@
+﻿  Main.cpp
+D:\Code\1_NJUCM\NJUCM_DataStructure\Final_VS\Main.cpp(166,12): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  Final_VS.vcxproj -> D:\Code\1_NJUCM\NJUCM_DataStructure\Final_VS\x64\Debug\Final_VS.exe
