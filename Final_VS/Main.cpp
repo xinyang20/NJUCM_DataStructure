@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-#include <cmath>
 #include <set>
 #include <ctime>
 //¹şÏ£Ëã·¨Ó¦ÓÃ
